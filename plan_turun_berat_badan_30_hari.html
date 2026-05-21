@@ -1,0 +1,284 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+.tabs{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:7px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:13px;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all .15s}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.section{display:none}.section.active{display:block}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:12px}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:var(--border-radius-md);font-weight:500;margin-bottom:8px}
+.badge-green{background:#EAF3DE;color:#3B6D11}
+.badge-amber{background:#FAEEDA;color:#854F0B}
+.badge-red{background:#FCEBEB;color:#A32D2D}
+.badge-blue{background:#E6F1FB;color:#185FA5}
+.badge-purple{background:#EEEDFE;color:#534AB7}
+.week-header{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:1.5rem 0 10px;text-transform:uppercase;letter-spacing:.05em}
+.day-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.day-row:last-child{border-bottom:none}
+.day-label{font-size:12px;font-weight:500;color:var(--color-text-secondary)}
+.day-content{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+.meal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.meal-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px}
+.meal-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.meal-item{font-size:13px;color:var(--color-text-primary);margin-bottom:4px;display:flex;gap:6px}
+.meal-item::before{content:"·";color:var(--color-text-tertiary);flex-shrink:0}
+.stat-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.stat-row:last-child{border-bottom:none}
+.stat-val{font-weight:500;color:var(--color-text-primary)}
+.tip-box{background:var(--color-background-secondary);border-left:2px solid #7F77DD;border-radius:0;padding:10px 14px;margin-bottom:10px;font-size:13px;line-height:1.6;color:var(--color-text-primary)}
+.progress-track{height:6px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden;margin-top:6px}
+.progress-fill{height:100%;border-radius:3px;transition:width .3s}
+.week-card{border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:1rem 1.25rem;margin-bottom:12px;background:var(--color-background-primary)}
+.exercise-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.exercise-item:last-child{border-bottom:none}
+.ex-name{font-weight:500;margin-bottom:2px}
+.ex-detail{color:var(--color-text-secondary);font-size:12px}
+.num-circle{width:28px;height:28px;border-radius:50%;background:#EEEDFE;color:#534AB7;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+</style>
+
+<div style="padding:1rem 0">
+<h2 style="sr-only">Rencana 30 Hari Turun 5kg</h2>
+
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+  <span style="font-size:22px;font-weight:500">Rencana 30 Hari — Turun 5kg</span>
+</div>
+<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem">Laki-laki 23 th · 95 kg · 175 cm · 100% gratis</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('overview')">Overview</button>
+  <button class="tab" onclick="showTab('latihan')">Latihan</button>
+  <button class="tab" onclick="showTab('makan')">Pola Makan</button>
+  <button class="tab" onclick="showTab('jadwal')">Jadwal Harian</button>
+  <button class="tab" onclick="showTab('tips')">Tips Rahasia</button>
+</div>
+
+<div id="overview" class="section active">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem">
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;text-align:center">
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">TARGET DEFISIT</div>
+      <div style="font-size:20px;font-weight:500">700 kkal</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">per hari</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;text-align:center">
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">MAKAN MAKS</div>
+      <div style="font-size:20px;font-weight:500">1.800 kkal</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">per hari</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;text-align:center">
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">LATIHAN</div>
+      <div style="font-size:20px;font-weight:500">6x</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">per minggu</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;text-align:center">
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px">TARGET</div>
+      <div style="font-size:20px;font-weight:500">−5 kg</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">30 hari</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Progress per minggu (perkiraan)</div>
+    <div id="week-progress"></div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Kenapa ini bisa berhasil?</div>
+    <div class="stat-row"><span>BMI saat ini</span><span class="stat-val">31.0 (Obesitas I)</span></div>
+    <div class="stat-row"><span>TDEE perkiraan</span><span class="stat-val">~2.500 kkal/hari</span></div>
+    <div class="stat-row"><span>Kalori makan target</span><span class="stat-val">1.800 kkal/hari</span></div>
+    <div class="stat-row"><span>Defisit dari diet</span><span class="stat-val">~700 kkal/hari</span></div>
+    <div class="stat-row"><span>Defisit dari olahraga</span><span class="stat-val">~300–500 kkal/hari</span></div>
+    <div class="stat-row"><span>Total defisit harian</span><span class="stat-val">~1.000–1.200 kkal</span></div>
+    <div class="stat-row"><span>Potensi penurunan</span><span class="stat-val"><strong>5–6 kg / 30 hari</strong></span></div>
+  </div>
+</div>
+
+<div id="latihan" class="section">
+  <div class="week-card">
+    <span class="badge badge-green">Minggu 1–2 · Foundation</span>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:12px">Mulai pelan tapi konsisten. Jangan cedera di awal.</p>
+    <div class="exercise-item">
+      <div class="num-circle">1</div>
+      <div><div class="ex-name">Jalan cepat / jogging ringan</div><div class="ex-detail">30–40 menit · 5x seminggu · gratis di jalan umum</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">2</div>
+      <div><div class="ex-name">Push-up (lutut boleh)</div><div class="ex-detail">3 set × 10 rep · istirahat 60 detik · setiap hari</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">3</div>
+      <div><div class="ex-name">Squat bodyweight</div><div class="ex-detail">3 set × 15 rep · setiap hari</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">4</div>
+      <div><div class="ex-name">Plank</div><div class="ex-detail">3 set × 20 detik · tingkatkan 5 detik tiap hari</div></div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <span class="badge badge-amber">Minggu 3–4 · Intensitas naik</span>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:12px">Tubuh sudah terbiasa. Waktunya push lebih keras.</p>
+    <div class="exercise-item">
+      <div class="num-circle">1</div>
+      <div><div class="ex-name">Jogging / lari interval</div><div class="ex-detail">40–50 menit · lari 2 menit + jalan 1 menit (bergantian) · 5x seminggu</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">2</div>
+      <div><div class="ex-name">Push-up standar</div><div class="ex-detail">4 set × 15 rep · tidak pakai lutut lagi</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">3</div>
+      <div><div class="ex-name">Jump squat</div><div class="ex-detail">3 set × 12 rep · bakar kalori 2× lebih banyak</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">4</div>
+      <div><div class="ex-name">Burpee</div><div class="ex-detail">3 set × 8 rep · raja pembakaran kalori</div></div>
+    </div>
+    <div class="exercise-item">
+      <div class="num-circle">5</div>
+      <div><div class="ex-name">Mountain climber</div><div class="ex-detail">3 set × 20 rep (tiap kaki) · inti + kardio sekaligus</div></div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Waktu terbaik olahraga:</strong> Pagi sebelum sarapan (fasted cardio) = bakar lemak lebih optimal. Kalau tidak bisa, sore hari juga tidak masalah.
+  </div>
+</div>
+
+<div id="makan" class="section">
+  <div class="tip-box" style="border-left-color:#1D9E75">
+    <strong>Prinsip utama:</strong> Makan 3x sehari, tidak melewatkan sarapan, stop makan jam 19.00–20.00. Tidak perlu beli makanan mahal.
+  </div>
+
+  <div style="font-size:14px;font-weight:500;margin-bottom:10px;margin-top:1rem">Contoh menu harian (murah & kenyang)</div>
+  <div class="meal-grid">
+    <div class="meal-card">
+      <div class="meal-title">Sarapan (~400 kkal)</div>
+      <div class="meal-item">Nasi putih 1 centong</div>
+      <div class="meal-item">Telur rebus / ceplok 2 butir</div>
+      <div class="meal-item">Tempe goreng 2 potong</div>
+      <div class="meal-item">Air putih</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-title">Makan siang (~600 kkal)</div>
+      <div class="meal-item">Nasi putih 1,5 centong</div>
+      <div class="meal-item">Ayam rebus / bakar</div>
+      <div class="meal-item">Sayur bening / tumis</div>
+      <div class="meal-item">Tahu goreng</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-title">Makan malam (~500 kkal)</div>
+      <div class="meal-item">Nasi putih 1 centong</div>
+      <div class="meal-item">Ikan goreng / tempe</div>
+      <div class="meal-item">Sayur rebus / lalapan</div>
+      <div class="meal-item">Makan maks jam 19.00</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-title">Snack opsional (~300 kkal)</div>
+      <div class="meal-item">Pisang 1–2 buah</div>
+      <div class="meal-item">Ubi rebus</div>
+      <div class="meal-item">Kacang rebus segenggam</div>
+      <div class="meal-item">Hanya jika lapar banget</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Yang WAJIB dihindari (gratis = tinggal stop)</div>
+    <div class="stat-row"><span>Minuman manis (es teh, kopi susu, soda)</span><span class="badge badge-red">Stop total</span></div>
+    <div class="stat-row"><span>Gorengan pinggir jalan berlebihan</span><span class="badge badge-red">Maks 2x/hari</span></div>
+    <div class="stat-row"><span>Mie instan</span><span class="badge badge-amber">Maks 2x/minggu</span></div>
+    <div class="stat-row"><span>Nasi porsi jumbo</span><span class="badge badge-amber">Kurangi 30%</span></div>
+    <div class="stat-row"><span>Makan malam lewat jam 20.00</span><span class="badge badge-red">Stop total</span></div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Air putih — senjata rahasia gratis</div>
+    <p style="font-size:13px;color:var(--color-text-secondary);line-height:1.7">Minum <strong>3–4 liter per hari</strong>. Minum 2 gelas besar sebelum makan = perut kenyang lebih cepat, makan lebih sedikit. Ini gratis dan efeknya nyata.</p>
+  </div>
+</div>
+
+<div id="jadwal" class="section">
+  <div class="tip-box">
+    Rutinitas ini dirancang agar bisa dilakukan siapapun — tidak butuh alat, tidak butuh gym, tidak butuh biaya.
+  </div>
+
+  <div class="week-header">Jadwal harian (Senin, Rabu, Jumat, Sabtu)</div>
+  <div class="card">
+    <div class="day-row"><div class="day-label">05.00 – 05.30</div><div class="day-content">Bangun, minum 2 gelas air putih, cuci muka</div></div>
+    <div class="day-row"><div class="day-label">05.30 – 06.30</div><div class="day-content">Olahraga (lari + latihan kekuatan sesuai minggu)</div></div>
+    <div class="day-row"><div class="day-label">06.30 – 07.00</div><div class="day-content">Mandi, sarapan bergizi</div></div>
+    <div class="day-row"><div class="day-label">12.00 – 13.00</div><div class="day-content">Makan siang — pilih menu hemat &amp; sehat</div></div>
+    <div class="day-row"><div class="day-label">16.00 – 16.30</div><div class="day-content">Jalan kaki ringan 30 menit (bonus kalori terbakar)</div></div>
+    <div class="day-row"><div class="day-label">18.30 – 19.00</div><div class="day-content">Makan malam — selesai sebelum jam 19.00</div></div>
+    <div class="day-row"><div class="day-label">21.00 – 22.00</div><div class="day-content">Tidur cukup — tidur = hormon lemak normal</div></div>
+  </div>
+
+  <div class="week-header">Hari Istirahat (Selasa, Kamis, Minggu)</div>
+  <div class="card">
+    <div class="day-row"><div class="day-label">Pagi</div><div class="day-content">Jalan santai 20–30 menit saja (active recovery)</div></div>
+    <div class="day-row"><div class="day-label">Siang</div><div class="day-content">Makan seperti biasa, jangan makan berlebihan karena "hari libur"</div></div>
+    <div class="day-row"><div class="day-label">Malam</div><div class="day-content">Tidur jam 21.30 — recovery tubuh sama pentingnya dengan latihan</div></div>
+  </div>
+</div>
+
+<div id="tips" class="section">
+  <div class="tip-box" style="border-left-color:#D85A30">
+    <strong>Timbang berat badan 1x seminggu saja</strong> — setiap pagi di hari yang sama, sebelum makan. Jangan setiap hari, fluktuasi normal bisa bikin galau.
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Hack gratis yang sering dilewatkan</div>
+    <div class="stat-row"><span>Kunyah makanan pelan-pelan</span><span class="stat-val">−15% kalori masuk</span></div>
+    <div class="stat-row"><span>Tidur 7–8 jam cukup</span><span class="stat-val">hormon lapar terkontrol</span></div>
+    <div class="stat-row"><span>Pakai piring lebih kecil</span><span class="stat-val">porsi otomatis turun</span></div>
+    <div class="stat-row"><span>Jalan kaki ke mana-mana</span><span class="stat-val">+200–400 kkal/hari</span></div>
+    <div class="stat-row"><span>Masak sendiri sebisa mungkin</span><span class="stat-val">kontrol kalori penuh</span></div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:500;margin-bottom:12px">Mental — ini yang paling penting</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.8">
+      <div style="margin-bottom:8px">✓ Slip 1 hari ≠ gagal. Kembali besok, bukan mulai dari nol.</div>
+      <div style="margin-bottom:8px">✓ 5 kg dalam 30 hari berat tapi sangat bisa. Kamu punya motivasi kuat — pakai itu.</div>
+      <div style="margin-bottom:8px">✓ Foto tubuh tiap minggu sebagai bukti progress, bukan hanya timbangan.</div>
+      <div>✓ Temukan teman atau akun medsos yang support — lingkungan = setengah pertempuran.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem">
+    <button onclick="sendPrompt('Tolong buatkan program latihan detail minggu pertama, set dan rep lengkap')" style="width:100%;padding:12px;margin-bottom:8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:13px;color:var(--color-text-primary);text-align:left">Program latihan detail minggu 1 ↗</button>
+    <button onclick="sendPrompt('Buatkan resep masakan sederhana murah untuk diet, yang enak dan mengenyangkan')" style="width:100%;padding:12px;margin-bottom:8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:13px;color:var(--color-text-primary);text-align:left">Resep masakan murah untuk diet ↗</button>
+    <button onclick="sendPrompt('Bagaimana cara mengatasi rasa lapar saat diet tanpa makan berlebihan?')" style="width:100%;padding:12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:13px;color:var(--color-text-primary);text-align:left">Cara atasi rasa lapar saat diet ↗</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+const weeks=[
+  {label:'Minggu 1',target:'−1.0 kg',fill:20,color:'#9FE1CB'},
+  {label:'Minggu 2',target:'−1.2 kg',fill:44,color:'#5DCAA5'},
+  {label:'Minggu 3',target:'−1.5 kg',fill:74,color:'#1D9E75'},
+  {label:'Minggu 4',target:'−1.3 kg',fill:100,color:'#0F6E56'},
+];
+const wp=document.getElementById('week-progress');
+weeks.forEach(w=>{
+  wp.innerHTML+=`
+  <div style="margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px">
+      <span>${w.label}</span><span style="font-weight:500">${w.target}</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width:${w.fill}%;background:${w.color}"></div>
+    </div>
+  </div>`;
+});
+</script>
